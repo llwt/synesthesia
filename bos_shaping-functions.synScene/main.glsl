@@ -1,6 +1,8 @@
 float plot(vec2 st, float pct){
-  return smoothstep( pct-0.02, pct, st.y) -
-         smoothstep( pct, pct+0.02, st.y);
+  return smoothstep( pct-0.01, pct, st.y) -
+         smoothstep( pct, pct+0.01, st.y);
+  
+  // return step(pct -0.01, st.y) - step(pct + 0.01, st.y);
 }
 
 /**
@@ -16,15 +18,20 @@ vec4 renderMain() {
 
   // return vec4(_uv.x, _uv.y, 0.0, 1.0);
 
-  float y = pow(_uv.x, syn_BassLevel * 5);
-  // float y = step(0.5, pow(_uv.x, syn_MidLevel * 5));
+  float exp = syn_BassLevel * 5.0;
+  float y = pow(_uv.x, exp);
+  // float y = pow(cos(PI * _uv.x / 2.0), exp);
+  // float y = pow(abs(sin(PI * _uv.x / 2.0)), exp);
+  // float y = pow(min( cos(PI * _uv.x / 2.0), 1.0 - abs(_uv.x)), exp);
+  // float y = pow(max(0.0, abs(_uv.x) * 2.0 - 1.0), exp);
 
-  vec3 color = vec3(y);
+  // float y = step(0.5, pow(_uv.x, skn_MidLevel * 5));
+
+  vec3 bgColor = vec3(y);
 
   // Plot a line
   float pct = plot(_uv, y);
-  // color = (1.0-pct)*color + pct * vec3(0.0,1.0,0.0);
-  color = (1.0-pct)*color + pct * vec3(0.0, syn_BassLevel, 0.0);
+  bgColor = (1.0-pct) * bgColor + pct * vec3(0.0, syn_BassLevel, 0.0);
 
-	return vec4(color,1.0);
+	return vec4(bgColor,1.0);
 }
