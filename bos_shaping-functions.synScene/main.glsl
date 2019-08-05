@@ -30,7 +30,7 @@ vec4 renderMain() {
   vec3 bgColor = vec3(y);
 
   // Plot a line
-  float pct = plot(_uv, y);
+  float pct = plot(_uv, y); // pct stands for "percent"
   bgColor = (1.0-pct) * bgColor + pct * vec3(0.0, syn_BassLevel, 0.0);
 
 	return vec4(bgColor,1.0);
