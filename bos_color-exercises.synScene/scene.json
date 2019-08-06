@@ -37,8 +37,8 @@
          "DEFAULT" : 0.3,
          "DESCRIPTION" : "Horizon Position",
          "IS_META" : false,
-         "MAX" : 0.9,
-         "MIN" : 0.1,
+         "MAX" : 1.0,
+         "MIN" : 0.0,
          "NAME" : "horizon",
          "UI_GROUP" : "layout"
       },
